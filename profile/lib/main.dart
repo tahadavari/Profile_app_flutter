@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,10 +34,27 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title: Text('Your Profile'),),
-      body: Center(
-        child: Text('Hello Taha'),
-      ),
-    );
+        appBar: AppBar(
+          title: Text('Your Profile'),
+          actions: [
+            Icon(CupertinoIcons.chat_bubble),
+            SizedBox(
+              width: 8,
+            ),
+            Icon(CupertinoIcons.ellipsis_vertical),
+            SizedBox(
+              width: 16,
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Row(
+              children: [
+                
+              ],
+            )
+          ],
+        ));
   }
 }
