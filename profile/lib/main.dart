@@ -80,152 +80,174 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(32),
-              child: Row(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/images/profile_image.png',
-                        width: 60,
-                        height: 60,
-                      )),
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Taha Davari',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text('Flutter Developer'),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              CupertinoIcons.location,
-                              color:
-                                  Theme.of(context).textTheme.bodyText1!.color,
-                              size: 14,
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text(
-                              'Tehran, Isfahan',
-                              style: Theme.of(context).textTheme.caption,
-                            )
-                          ],
-                        )
-                      ],
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          'assets/images/profile_image.png',
+                          width: 60,
+                          height: 60,
+                        )),
+                    SizedBox(
+                      width: 16,
                     ),
-                  ),
-                  Icon(
-                    CupertinoIcons.heart,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Taha Davari',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Text('Flutter Developer'),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                CupertinoIcons.location,
+                                color:
+                                    Theme.of(context).textTheme.bodyText1!.color,
+                                size: 14,
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                'Tehran, Isfahan',
+                                style: Theme.of(context).textTheme.caption,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      CupertinoIcons.heart,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
-              child: Text(
-                'ections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-                style: Theme.of(context).textTheme.bodyText1,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
+                child: Text(
+                  'ections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
-            ),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(32, 16, 0, 32),
-              child: Row(
-                children: [
-                  Text('Skills',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Icon(
-                    CupertinoIcons.chevron_down,
-                    size: 12,
-                  )
-                ],
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 16, 0, 32),
+                child: Row(
+                  children: [
+                    Text('Skills',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Icon(
+                      CupertinoIcons.chevron_down,
+                      size: 12,
+                    )
+                  ],
+                ),
               ),
-            ),
-            Center(
-              child: Wrap(
-                direction: Axis.horizontal,
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  Skill(
-                    onTap: () {
-                      updateSelectedSkill(SkillState.photoshop);
-                    },
-                    type: SkillState.photoshop,
-                    title: 'Photoshop',
-                    imgPath: 'assets/images/app_icon_01.png',
-                    shadowColor: Colors.blue,
-                    isActive: skill == SkillState.photoshop,
-                  ),
-                  Skill(
-                    onTap: () {
-                      updateSelectedSkill(SkillState.xd);
-                    },
-                    type: SkillState.xd,
-                    title: 'Adobe XD',
-                    imgPath: 'assets/images/app_icon_05.png',
-                    shadowColor: Colors.pink,
-                    isActive: skill == SkillState.xd,
-                  ),
-                  Skill(
-                    onTap: () {
-                      updateSelectedSkill(SkillState.illustrator);
-                    },
-                    type: SkillState.illustrator,
-                    title: 'Illustrator',
-                    imgPath: 'assets/images/app_icon_04.png',
-                    shadowColor: Colors.orange,
-                    isActive: skill == SkillState.illustrator,
-                  ),
-                  Skill(
-                    onTap: () {
-                      updateSelectedSkill(SkillState.afterEffect);
-                    },
-                    type: SkillState.afterEffect,
-                    title: 'After Effect',
-                    imgPath: 'assets/images/app_icon_03.png',
-                    shadowColor: Colors.blue.shade800,
-                    isActive: skill == SkillState.afterEffect,
-                  ),
-                  Skill(
-                    onTap: () {
-                      updateSelectedSkill(SkillState.lightRoom);
-                    },
-                    type: SkillState.lightRoom,
-                    title: 'Lightroom',
-                    imgPath: 'assets/images/app_icon_02.png',
-                    shadowColor: Colors.blue,
-                    isActive: skill == SkillState.lightRoom,
-                  ),
-                ],
+              Center(
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    Skill(
+                      onTap: () {
+                        updateSelectedSkill(SkillState.photoshop);
+                      },
+                      type: SkillState.photoshop,
+                      title: 'Photoshop',
+                      imgPath: 'assets/images/app_icon_01.png',
+                      shadowColor: Colors.blue,
+                      isActive: skill == SkillState.photoshop,
+                    ),
+                    Skill(
+                      onTap: () {
+                        updateSelectedSkill(SkillState.xd);
+                      },
+                      type: SkillState.xd,
+                      title: 'Adobe XD',
+                      imgPath: 'assets/images/app_icon_05.png',
+                      shadowColor: Colors.pink,
+                      isActive: skill == SkillState.xd,
+                    ),
+                    Skill(
+                      onTap: () {
+                        updateSelectedSkill(SkillState.illustrator);
+                      },
+                      type: SkillState.illustrator,
+                      title: 'Illustrator',
+                      imgPath: 'assets/images/app_icon_04.png',
+                      shadowColor: Colors.orange,
+                      isActive: skill == SkillState.illustrator,
+                    ),
+                    Skill(
+                      onTap: () {
+                        updateSelectedSkill(SkillState.afterEffect);
+                      },
+                      type: SkillState.afterEffect,
+                      title: 'After Effect',
+                      imgPath: 'assets/images/app_icon_03.png',
+                      shadowColor: Colors.blue.shade800,
+                      isActive: skill == SkillState.afterEffect,
+                    ),
+                    Skill(
+                      onTap: () {
+                        updateSelectedSkill(SkillState.lightRoom);
+                      },
+                      type: SkillState.lightRoom,
+                      title: 'Lightroom',
+                      imgPath: 'assets/images/app_icon_02.png',
+                      shadowColor: Colors.blue,
+                      isActive: skill == SkillState.lightRoom,
+                    ),
+                  ],
+                ),
               ),
-            )
-          ],
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Personal Information',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    TextField(
+                        decoration: InputDecoration(
+                            labelText: 'Email', icon: Icon(CupertinoIcons.at))),
+                    TextField(
+                        decoration: InputDecoration(
+                            labelText: 'Password', icon: Icon(CupertinoIcons.lock))),
+                  ],
+                ),
+              )
+            ],
+          ),
         ));
   }
 }
@@ -268,7 +290,8 @@ class Skill extends StatelessWidget {
               decoration: isActive
                   ? BoxDecoration(
                       boxShadow: [
-                        BoxShadow(color: shadowColor.withOpacity(0.5), blurRadius: 20)
+                        BoxShadow(
+                            color: shadowColor.withOpacity(0.5), blurRadius: 20)
                       ],
                     )
                   : null,
