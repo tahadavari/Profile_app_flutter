@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color surfaceColor = Color(0x0dffffff);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: Colors.pink.shade400,
         brightness: Brightness.dark,
+        dividerColor: surfaceColor,
         dividerTheme: DividerThemeData(
             color: Color.fromARGB(100, 255, 255, 255),
             indent: 32,
@@ -47,7 +49,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+enum SkillState { photoshop, xd, illustrator, afterEffect, lightRoom }
+
+class _MyHomePageState extends State<MyHomePage> {
+  SkillState skill = SkillState.photoshop;
+  void updateSelectedSkill(SkillState type) {
+    setState(() {
+      this.skill = type;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +81,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(32),
@@ -129,8 +146,145 @@ class MyHomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
-            Divider()
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(32, 16, 0, 32),
+              child: Row(
+                children: [
+                  Text('Skills',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  Icon(
+                    CupertinoIcons.chevron_down,
+                    size: 12,
+                  )
+                ],
+              ),
+            ),
+            Center(
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  Skill(
+                    onTap: () {
+                      updateSelectedSkill(SkillState.photoshop);
+                    },
+                    type: SkillState.photoshop,
+                    title: 'Photoshop',
+                    imgPath: 'assets/images/app_icon_01.png',
+                    shadowColor: Colors.blue,
+                    isActive: skill == SkillState.photoshop,
+                  ),
+                  Skill(
+                    onTap: () {
+                      updateSelectedSkill(SkillState.xd);
+                    },
+                    type: SkillState.xd,
+                    title: 'Adobe XD',
+                    imgPath: 'assets/images/app_icon_05.png',
+                    shadowColor: Colors.pink,
+                    isActive: skill == SkillState.xd,
+                  ),
+                  Skill(
+                    onTap: () {
+                      updateSelectedSkill(SkillState.illustrator);
+                    },
+                    type: SkillState.illustrator,
+                    title: 'Illustrator',
+                    imgPath: 'assets/images/app_icon_04.png',
+                    shadowColor: Colors.orange,
+                    isActive: skill == SkillState.illustrator,
+                  ),
+                  Skill(
+                    onTap: () {
+                      updateSelectedSkill(SkillState.afterEffect);
+                    },
+                    type: SkillState.afterEffect,
+                    title: 'After Effect',
+                    imgPath: 'assets/images/app_icon_03.png',
+                    shadowColor: Colors.blue.shade800,
+                    isActive: skill == SkillState.afterEffect,
+                  ),
+                  Skill(
+                    onTap: () {
+                      updateSelectedSkill(SkillState.lightRoom);
+                    },
+                    type: SkillState.lightRoom,
+                    title: 'Lightroom',
+                    imgPath: 'assets/images/app_icon_02.png',
+                    shadowColor: Colors.blue,
+                    isActive: skill == SkillState.lightRoom,
+                  ),
+                ],
+              ),
+            )
           ],
         ));
+  }
+}
+
+class Skill extends StatelessWidget {
+  final SkillState type;
+  final String title;
+  final String imgPath;
+  final Color shadowColor;
+  final bool isActive;
+  final Function() onTap;
+
+  const Skill({
+    Key? key,
+    required this.type,
+    required this.title,
+    required this.imgPath,
+    required this.shadowColor,
+    required this.isActive,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onTap,
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: isActive
+            ? BoxDecoration(
+                color: Theme.of(context).dividerColor,
+                borderRadius: BorderRadius.circular(12))
+            : null,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: isActive
+                  ? BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(color: shadowColor.withOpacity(0.5), blurRadius: 20)
+                      ],
+                    )
+                  : null,
+              child: Image.asset(
+                imgPath,
+                width: 40,
+                height: 40,
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(title)
+          ],
+        ),
+      ),
+    );
   }
 }
