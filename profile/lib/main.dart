@@ -49,10 +49,45 @@ class MyHomePage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Row(
-              children: [
-                
-              ],
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        'assets/images/profile_image.png',
+                        width: 60,
+                        height: 60,
+                      )),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Taha Davari'),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text('Flutter Developer'),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Row(
+                        children: [
+                          Icon(CupertinoIcons.location),
+                          Text('Tehran, Isfahan')
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
+              child: Text('ections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'),
             )
           ],
         ));
