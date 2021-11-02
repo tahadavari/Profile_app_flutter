@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color surfaceColor = Color(0x0dffffff);
+    Color primaryColor = Colors.pink.shade400;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -26,9 +27,19 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-        primaryColor: Colors.pink.shade400,
+        primaryColor: primaryColor,
         brightness: Brightness.dark,
         dividerColor: surfaceColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(primaryColor))),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none),
+          filled: true,
+          fillColor: surfaceColor,
+        ),
         dividerTheme: DividerThemeData(
             color: Color.fromARGB(100, 255, 255, 255),
             indent: 32,
@@ -81,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -117,8 +129,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               Icon(
                                 CupertinoIcons.location,
-                                color:
-                                    Theme.of(context).textTheme.bodyText1!.color,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                                 size: 14,
                               ),
                               SizedBox(
@@ -230,19 +244,35 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Personal Information',
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2!
                             .copyWith(fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 16,
+                    ),
                     TextField(
                         decoration: InputDecoration(
-                            labelText: 'Email', icon: Icon(CupertinoIcons.at))),
+                            labelText: 'Email',
+                            prefixIcon: Icon(CupertinoIcons.at))),
+                    SizedBox(
+                      height: 8,
+                    ),
                     TextField(
                         decoration: InputDecoration(
-                            labelText: 'Password', icon: Icon(CupertinoIcons.lock))),
+                            labelText: 'Password',
+                            prefixIcon: Icon(CupertinoIcons.lock))),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: ElevatedButton(
+                            onPressed: () {}, child: Text('Save'))),
                   ],
                 ),
               )
