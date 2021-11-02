@@ -1,0 +1,20 @@
+{
+    "profileTitle": "My Profile",
+    "name":"Taha Davari",
+    "job":"Back-End & Flutter Developer",
+    "location":"Iran, Esfahan",
+    "aboutMe":"I am a backend developer and I am interested in teamwork and I am learning every day. Interested in the field of data science I am ready to work as a backend developer.",
+    "skills":"Skills",
+    "photoshop":"Photoshop",
+    "adobeXD":"Adobe XD",
+    "illustrator":"Illustrator",
+    "afterEffect":"After Effect",
+    "lightRoom":"Light Room",
+    "personalInformation":"Personal Information",
+    "email":"Email",
+    "password":"Password",
+    "selectedLanguage":"Selected Language",
+    "enLanguage":"English",
+    "faLanguage":"Persian",
+    "save":"Save"
+}
