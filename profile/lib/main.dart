@@ -6,61 +6,100 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyAppThemeConfig {
+  final Color primaryColor = Colors.pink.shade400;
+  final Color primaryTextColor;
+  final Color secindryTextColor;
+  final Color surfaceColor;
+  final Color backgroundColor;
+  final Color appBarColor;
+  final Brightness brightness;
+  MyAppThemeConfig.dark()
+      : primaryTextColor = Colors.white,
+        secindryTextColor = Colors.white70,
+        surfaceColor = Color(0x0dffffff),
+        backgroundColor = Color.fromARGB(255, 30, 30, 30),
+        appBarColor = Colors.black,
+        brightness = Brightness.dark;
+  MyAppThemeConfig.light()
+      : primaryTextColor = Colors.grey.shade900,
+        secindryTextColor = Colors.grey.shade900.withOpacity(0.8),
+        surfaceColor = Color(0x0d000000),
+        backgroundColor = Colors.white,
+        appBarColor = Color.fromARGB(255, 235, 235, 235),
+        brightness = Brightness.light;
+
+  ThemeData getTheme() {
+    return ThemeData(
+      primarySwatch: Colors.blue,
+      primaryColor: primaryColor,
+      brightness: brightness,
+      dividerColor: surfaceColor,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(primaryColor))),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none),
+        filled: true,
+        fillColor: surfaceColor,
+      ),
+      dividerTheme: DividerThemeData(
+          color: Color.fromARGB(100, 255, 255, 255), indent: 32, endIndent: 32),
+      scaffoldBackgroundColor: backgroundColor,
+      appBarTheme: AppBarTheme(elevation: 0,backgroundColor: appBarColor,foregroundColor: primaryTextColor),
+      textTheme: GoogleFonts.latoTextTheme(
+        TextTheme(
+            bodyText2: TextStyle(fontSize: 15, color: primaryTextColor),
+            bodyText1: TextStyle(fontSize: 13, color: secindryTextColor),
+            headline6:
+                TextStyle(fontWeight: FontWeight.bold, color: primaryTextColor),
+            subtitle1: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: primaryTextColor)),
+      ),
+    );
+  }
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode themeMode = ThemeMode.dark;
   @override
   Widget build(BuildContext context) {
     Color surfaceColor = Color(0x0dffffff);
     Color primaryColor = Colors.pink.shade400;
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        primaryColor: primaryColor,
-        brightness: Brightness.dark,
-        dividerColor: surfaceColor,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(primaryColor))),
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none),
-          filled: true,
-          fillColor: surfaceColor,
-        ),
-        dividerTheme: DividerThemeData(
-            color: Color.fromARGB(100, 255, 255, 255),
-            indent: 32,
-            endIndent: 32),
-        scaffoldBackgroundColor: Color.fromARGB(255, 30, 30, 30),
-        appBarTheme: AppBarTheme(backgroundColor: Colors.black),
-        textTheme: GoogleFonts.latoTextTheme(
-          TextTheme(
-              bodyText2: TextStyle(fontSize: 15),
-              bodyText1: TextStyle(
-                  fontSize: 13, color: Color.fromARGB(200, 255, 255, 255)),
-              headline6: TextStyle(fontWeight: FontWeight.bold),
-              subtitle1: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        ),
+      theme: themeMode == ThemeMode.dark
+          ? MyAppThemeConfig.dark().getTheme()
+          : MyAppThemeConfig.light().getTheme(),
+      home: MyHomePage(
+        toggleThemeMode: () {
+          setState(() {
+            if (themeMode == ThemeMode.dark)
+              themeMode = ThemeMode.light;
+            else
+              themeMode = ThemeMode.dark;
+          });
+        },
       ),
-      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  final Function() toggleThemeMode;
+
+  const MyHomePage({Key? key, required this.toggleThemeMode}) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -85,7 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               width: 8,
             ),
-            Icon(CupertinoIcons.ellipsis_vertical),
+            InkWell(
+                onTap: widget.toggleThemeMode,
+                child: Icon(CupertinoIcons.ellipsis_vertical)),
             SizedBox(
               width: 16,
             ),
@@ -157,13 +198,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
                 child: Text(
-                  'ections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+                  'I am a backend developer and I am interested in teamwork and I am learning every day. Interested in the field of data science I am ready to work as a backend developer.',
                   style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.justify,
                 ),
               ),
               Divider(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(32, 16, 0, 32),
+                padding: const EdgeInsets.fromLTRB(32, 16, 0, 12),
                 child: Row(
                   children: [
                     Text('Skills',
@@ -259,7 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             labelText: 'Email',
                             prefixIcon: Icon(CupertinoIcons.at))),
                     SizedBox(
-                      height: 8,
+                      height: 12,
                     ),
                     TextField(
                         decoration: InputDecoration(
